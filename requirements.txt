@@ -1,0 +1,7 @@
+streamlit
+pandas
+seaborn
+matplotlib
+python-dotenv
+huggingface_hub
+requests
