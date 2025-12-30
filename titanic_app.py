@@ -251,26 +251,20 @@ try:
 
         with col_r1:
             st.subheader("📈 Reference Chart")
-            fig, ax = plt.subplots()
-            
             if not filtered_df.empty:
-                # Map values to labels FIRST to fix the "Green Death" bug
-                chart_df = filtered_df['survived'].map({0: "Did Not Survive", 1: "Survived"})
-                status_counts = chart_df.value_counts()
-                
-                # Dynamic Colors (Green for Survived, Red for Dead)
-                color_map = {"Survived": "#4ecdc4", "Did Not Survive": "#ff6b6b"}
-                colors = [color_map.get(label, "#999999") for label in status_counts.index]
-
-                status_counts.plot.pie(
-                    autopct='%1.1f%%',
-                    colors=colors,
-                    startangle=90,
-                    ax=ax
-                )
-                ax.set_ylabel('')
-                st.pyplot(fig)
-
+                fig_rep, ax_rep = plt.subplots()
+		        rep_chart_data = filtered_df['survived'].map({0: "Did Not Survive", 1: "Survived"})
+                rep_status_counts = rep_chart_data.value_counts()
+                rep_color_map = {"Survived": "#4ecdc4", "Did Not Survive": "#ff6b6b"}
+                rep_colors = [rep_color_map[label] for label in rep_status_counts.index]
+		        rep_status_counts.plot.pie(
+                        autopct='%1.1f%%',
+                        colors=rep_colors,
+                        startangle=90,
+                        ax=ax_rep
+                    )
+                    ax_rep.set_ylabel('') 
+                    st.pyplot(fig_rep)
         with col_r2:
             st.subheader("📊 Data Summary")
             st.metric(label="Total Passengers", value=total_passengers)
@@ -324,4 +318,5 @@ except Exception as e:
     st.error("⚠️ An unexpected error occurred! Please try refreshing the page.")
 
     # st.error(f"An unexpected error occurred: {e}")
+
 
