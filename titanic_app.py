@@ -251,8 +251,6 @@ try:
 
         with col_r1:
             st.subheader("📈 Reference Chart")
-            with col2:
-            st.subheader("📈 Survival Chart")
             fig, ax = plt.subplots()
             
             if not filtered_df.empty:
@@ -326,3 +324,4 @@ except Exception as e:
     st.error("⚠️ An unexpected error occurred! Please try refreshing the page.")
 
     # st.error(f"An unexpected error occurred: {e}")
+
