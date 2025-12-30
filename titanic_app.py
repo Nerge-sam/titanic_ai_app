@@ -143,7 +143,7 @@ try:
     with f1:
         selected_sex = st.selectbox("Select Gender:", ['male', 'female'], key='sex')
     with f2:
-        selected_age = st.slider("Max Age:", 1, 80, 35, key='age')
+        selected_age = st.slider("Max Age:", 1, 80, 33, key='age')
     with f3:
         # Custom formatting for the Class selector
         selected_class = st.selectbox(
@@ -318,3 +318,4 @@ except Exception as e:
     st.error("⚠️ An unexpected error occurred! Please try refreshing the page.")
 
     # st.error(f"An unexpected error occurred: {e}")
+
