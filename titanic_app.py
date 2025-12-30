@@ -251,17 +251,27 @@ try:
 
         with col_r1:
             st.subheader("📈 Reference Chart")
+            with col2:
+            st.subheader("📈 Survival Chart")
+            fig, ax = plt.subplots()
+            
             if not filtered_df.empty:
-                fig_rep, ax_rep = plt.subplots()
-                filtered_df['survived'].value_counts().plot.pie(
-                    labels=['Survived', 'Did Not Survive'],
+                # Map values to labels FIRST to fix the "Green Death" bug
+                chart_df = filtered_df['survived'].map({0: "Did Not Survive", 1: "Survived"})
+                status_counts = chart_df.value_counts()
+                
+                # Dynamic Colors (Green for Survived, Red for Dead)
+                color_map = {"Survived": "#4ecdc4", "Did Not Survive": "#ff6b6b"}
+                colors = [color_map.get(label, "#999999") for label in status_counts.index]
+
+                status_counts.plot.pie(
                     autopct='%1.1f%%',
-                    colors=['#4ecdc4', '#ff6b6b'],
+                    colors=colors,
                     startangle=90,
-                    ax=ax_rep
+                    ax=ax
                 )
-                ax_rep.set_ylabel('')
-                st.pyplot(fig_rep)
+                ax.set_ylabel('')
+                st.pyplot(fig)
 
         with col_r2:
             st.subheader("📊 Data Summary")
@@ -314,4 +324,5 @@ try:
 
 except Exception as e:
     st.error("⚠️ An unexpected error occurred! Please try refreshing the page.")
+
     # st.error(f"An unexpected error occurred: {e}")
