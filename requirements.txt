@@ -5,3 +5,5 @@ matplotlib
 python-dotenv
 huggingface_hub
 requests
+scikit-learn
+joblib
